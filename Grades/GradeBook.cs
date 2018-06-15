@@ -10,6 +10,7 @@ namespace Grades
     {
         public GradeBook()
         {
+            _name = "Empty";
             grades = new List<float>();
         }
 
@@ -18,7 +19,7 @@ namespace Grades
             GradeStatistics stats = new GradeStatistics();
 
             float sum = 0;
-            foreach(float grade in grades)
+            foreach (float grade in grades)
             {
                 stats.HighestGrade = Math.Max(grade, stats.HighestGrade);
                 stats.LowestGrade = Math.Min(grade, stats.LowestGrade);
@@ -28,8 +29,30 @@ namespace Grades
             return stats;
         }
 
-        public string Name;
-        public string Level;
+        public string Name
+        {    
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                if(!String.IsNullOrEmpty(value))
+                {
+                    if(_name != value)
+                    {
+                        NameChanged(_name, value);
+                    }
+
+                    _name = value;
+                }
+            }
+        }
+
+        public string Level
+            {
+                get; set;
+            }
         public string Parent;
         public int Age; // { get; set; }
 
@@ -47,6 +70,9 @@ namespace Grades
             grades.Add(grade);
         }
 
+        public NameChangedDelegate NameChanged;
+
+        private string _name;
         private List<float> grades;
 
     }
