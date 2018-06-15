@@ -30,12 +30,14 @@ namespace Grades
 
         public string Name;
         public string Level;
+        public string Parent;
         public int Age; // { get; set; }
 
-        public GradeBook(string name, string level, List<float> grades, int age)
+        public GradeBook(string name, string level, string parent, List<float> grades, int age)
         {
             Name = name;
             Level = level;
+            Parent = parent;
             this.grades = grades;
             Age = age;
         }
